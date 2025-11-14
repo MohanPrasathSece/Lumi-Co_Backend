@@ -24,6 +24,10 @@ const corsOptions = {
 
     const isAllowed = allowedOrigins.some((allowed) => {
       if (allowed === "*") return true;
+      if (allowed.startsWith("*.")) {
+        const suffix = allowed.slice(1); // ".example.com"
+        return origin.endsWith(suffix);
+      }
       return allowed === origin;
     });
 
